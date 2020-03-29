@@ -20,10 +20,6 @@ export class BoletaService {
         return this.http.get<Boleta[]>(environment.api+'/admin/propiedades/boleta/historico?id='+id);
     }
 
-    pagoBoleta(boleta: Boleta): Observable<any> {
-        return this.http.post<any>(environment.api+'/admin/propiedades/boleta/pago', boleta);
-    }
-
     configuraBoleta(configuracion: string): Observable<any> {
         return this.http.post<any>(environment.api+'/admin/configuracion/cambiar',{configuracion: configuracion});
     }

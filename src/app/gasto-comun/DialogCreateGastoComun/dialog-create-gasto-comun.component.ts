@@ -10,8 +10,6 @@ import { GastoComun } from "app/model/gastocomun";
 import { GastoComunService } from "app/services/gasto-comun.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { finalize } from 'rxjs/operators';
-import { Cloudinary } from '@cloudinary/angular-5.x'; 
-import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 @Component({
   selector: 'app-dialog-add-gasto-comun',
   templateUrl: 'dialog-create-gasto-comun.component.html',
@@ -30,18 +28,11 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 export class DialogCreateGastoComun implements OnInit {
   newGastoComun: GastoComun = {} as GastoComun;
   public gastoComunForm : FormGroup;
-  uploader: CloudinaryUploader = new CloudinaryUploader(
-    new CloudinaryOptions({ cloudName: 'hxdxptasm', 
-    uploadPreset: 'ml_default', })
-    );
-    res;
   constructor(
     public dialogRef: MatDialogRef<DialogCreateGastoComun>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private gastoComunService: GastoComunService,
-    private formBuilder: FormBuilder,
-    private dialog: MatDialog,
-    private cloudinary: Cloudinary,
+    private formBuilder: FormBuilder
     ) { }
 
     ngOnInit() {
@@ -102,17 +93,5 @@ export class DialogCreateGastoComun implements OnInit {
     this.dialogRef.close();
   }
 
-  upload(){
-    this.uploader.uploadAll();
-    this.uploader.onSuccessItem = 
-    (item: any, response: string, status: number, headers: any): any => {
-      this.res = JSON.parse(response);
-      
-      console.log(this.res);
-    }
-      this.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
-      }
-      ;
-    }
+
 }

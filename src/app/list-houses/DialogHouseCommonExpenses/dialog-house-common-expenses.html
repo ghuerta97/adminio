@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Gastos comunes</h1>
+<h1 mat-dialog-title>Boletas</h1>
 <div mat-dialog-content>
 
   <div>
-    Gastos Comunes
+    Detalles de gastos comunes
     <ol>
       <li *ngFor="let gasto of data.gastosComunes">{{gasto.descripcion}}</li>
     </ol>
@@ -31,4 +31,7 @@
 <div mat-dialog-actions>
   <button style="align-content: center" mat-button color="accent" (click)="onNoClick()">Cerrar</button>
   <button mat-button color="primary" (click)="payTotal()" >Pagar Total</button>
+</div>
+<div *ngIf="data.pagada">
+  La boleta de este mes esta pagada
 </div>

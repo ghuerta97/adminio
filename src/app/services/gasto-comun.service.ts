@@ -46,4 +46,8 @@ export class GastoComunService {
     return this.http.request(req);
   }
 
+  pagar(id:number){
+    return this.http.post<any>(environment.api+'/admin/propiedades/boleta/pago?id='+id,{})
+  }
+
 }
