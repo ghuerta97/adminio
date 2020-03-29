@@ -9,7 +9,10 @@ import { Configuration } from 'app/model/configuracion';
 })
 export class ConfigurationComponent implements OnInit {
   time = {hour: 13, minute: 30};
-  dias = []
+  dias = [];
+  selectedForma: any;
+  selectedDia: any;
+
   constructor(private configuracionService: ConfigurationService) { 
     for (let i = 1; i < 29; i++) {
       this.dias.push(i);
