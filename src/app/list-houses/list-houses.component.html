@@ -1,0 +1,104 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search house...">
+      </mat-form-field>
+    </div>
+
+    <div class="table-responsive-md">
+
+      <table mat-table [dataSource]="dataSource" class="table table-borderless">
+
+  
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>
+            <div *ngIf="speed.algo">
+              <mat-checkbox #checkbox1 [(ngModel)]="masterChecked" (change)="allCheckboxPage(masterChecked)"
+                class="example-margin" [indeterminate]="indeterCheckbox1" labelPosition="afer" disabled="false">
+                No.
+              </mat-checkbox>
+            </div>
+            <div *ngIf="!speed.algo"> No. Propiedad </div>
+
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="speed.algo">
+              <mat-checkbox [(ngModel)]="element.checked" (change)="addHouseDelete()" class="example-margin"
+                [indeterminate]="false" labelPosition="afer" disabled="false">
+                {{element.numeroPropiedad}}
+              </mat-checkbox>
+            </div>
+            <div *ngIf="!speed.algo"> {{element.numeroPropiedad}} </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action1">
+          <th style="text-align: center" mat-header-cell *matHeaderCellDef> Opciones </th>
+          <td  mat-cell *matCellDef="let element">
+            <button class="col-2 col-md-4" (click)="clickShowDetailsHouse(element)" color="primary" mat-button>
+             <i class="material-icons">assignment</i> <div *ngIf="!isMobileMenu()" >Details</div>
+            </button>
+            <button class="col-2 col-md-4" (click)="clickShowCommonExpensesHouse(element.boletas[element.boletas.length-1])" color="accent" mat-button>
+               <i class="material-icons">attach_money</i> <div *ngIf="!isMobileMenu()" >Common Expenses</div>
+              </button>
+              <button class="col-2 col-md-4" (click)="clickShowHomeOwner(element.propietario)" color="danger" mat-button>
+                 <i class="material-icons">person</i> <div *ngIf="!isMobileMenu()" > See Homeowner</div>
+                </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator class="col" #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <!-- <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">No. Propiedad</th>
+        <th scope="col">Opciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let propiedad of houses; index as i;">
+        <th scope="row"> {{ i }}</th>
+        <td>{{ propiedad.numeroPropiedad}}</td>
+        <td>
+          <button class="col-2 col-md-4" (click)="clickShowDetailsHouse(propiedad)" color="primary" >
+            <i class="material-icons">assignment</i> <div *ngIf="!isMobileMenu()" >Details</div>
+           </button>
+           <button class="col-2 col-md-4" (click)="clickShowCommonExpensesHouse(propiedad.boletas[propiedad.boletas.length-1])" color="accent" >
+              <i class="material-icons">attach_money</i> <div *ngIf="!isMobileMenu()" >Common Expenses</div>
+             </button>
+             <button class="col-2 col-md-4" (click)="clickShowHomeOwner(propiedad.propietario)" color="danger" >
+                <i class="material-icons">person</i> <div *ngIf="!isMobileMenu()" > See Homeowner</div>
+               </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+    
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>  -->
+
+    <app-speed-dial-fab #speed color='primary' [fabButtons]="fabButtons"></app-speed-dial-fab>
+    <div *ngIf="speed.algo">
+      <button class="btn btn-danger" (click)="deleteHouses()"><i class="material-icons">delete</i> Delete</button>
+      <button class="btn btn-warning" (click)="cancelDelete(speed.algo  = false, masterChecked = false)"><i
+          class="material-icons">cancel</i> Cancel</button>
+    </div>
+  </div>
+</div>

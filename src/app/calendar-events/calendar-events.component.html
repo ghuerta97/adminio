@@ -1,0 +1,7 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <full-calendar *ngIf="options" #fullcalendar [editable]="true" [events]="options.events" [header]="options.header"
+  [buttonIcons]="options.buttonIcons" [footer]="options.footer" [defaultView]="options.defaultView" (dateClick)="dateClick($event)" (eventDragStop)="eventDragStop($event)"
+  [plugins]="options.plugins" [themeSystem]="options.themeSystem" (eventClick)="eventClick($event)"></full-calendar>
+  </div>
+</div>

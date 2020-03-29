@@ -1,0 +1,91 @@
+<div class="card">
+    <div class="card-header card-header-danger">
+        <h4 class="card-title">{{title}}</h4>
+        <p class="card-category">{{subtitle}}</p>
+    </div>
+    <form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+
+
+
+            <div class="row">
+                <div class="col-md">
+                    <div class="card">
+                        <div class="card-header card-header-icon card-header-rose">
+                            <div class="card-icon">
+                                <i class="material-icons">house</i>
+                            </div>
+                            <h4 class="card-title">Identification</h4>
+                        </div>
+                        <div class="card-body">
+                            <mat-form-field>
+                                <input matInput placeholder="Ingresar numero..." formControlName="number">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>HomeOwner</mat-label>
+                                <mat-select formControlName="propietario" required>
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let owner of listPropietario; "
+                                        [value]="owner" >
+                                        {{owner.nombre}}
+                                        
+                                    </mat-option>
+                                    <mat-option>
+                                        <div  (click)="openAddHomeOwner()">
+                                            Agregar homeowner
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="houseForm.hasError('required')">Please choose an homeowner
+                                </mat-error>
+                                <mat-hint>Dueño de la casa </mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-header card-header-icon card-header-warning">
+                            <div class="card-icon">
+                                <i class="material-icons">description</i>
+                            </div>
+                            <h4 class="card-title">Caracteristica</h4>
+                        </div>
+                        <div class="card-body">
+                            <table *ngIf="!isMobileMenu()" class="example-full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <input style="font-weight: bold;" matInput value="Tamaño" disabled>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <mat-form-field>
+                                            <input matInput formControlName="m2" placeholder=" " required>
+                                            <span matSuffix>mts2</span>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table *ngIf="isMobileMenu()" class="example-full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field>
+                                            <input matInput formControlName="m2" placeholder="Tamaño(mts2)"
+                                                required>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <button class="btn btn-success col-md-3" type="submit" >{{titleButton}}</button>
+            <button class="btn btn-danger col-md-3" (click)="onNoClick()">Cancel</button>
+        </div>
+    </form>
+</div>

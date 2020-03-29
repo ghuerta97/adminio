@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="card-header card-header-icon card-header-primary">
+        <div class="card-icon">
+            <i class="material-icons">person_outline</i>
+        </div>
+        <h4 class="card-title">Propietario</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #nombre [value]="data.nombre" name="nombre" matInput placeholder="Nombre de propietario" [disabled]="enabled" required>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #correo [value]="data.correo"  name="correo" matInput placeholder="Correo" [disabled]="enabled" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #telefono [value]="data.ntelefono" name="telefono" matInput placeholder="Numero de telefono" [disabled]="enabled" required>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #direccion [value]="data.direccion" name="direccion" matInput placeholder="Direccion" [disabled]="enabled" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-1 col-md-3">
+                <mat-chip-list>
+                        <mat-chip *ngIf="enabled" color="accent" (click)="onNoClick()" selected>Cerrar</mat-chip>
+                        <mat-chip *ngIf="!enabled" color="accent" (click)="enabled = true" selected>Cancelar</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="col-10 col-md-9">
+                <mat-chip-list>
+                    <mat-chip *ngIf="enabled" color="primary" (click)="enabled =  updatedEnabled(enabled)" selected>  Editar Propietario</mat-chip>
+                    <mat-chip *ngIf="enabled" style="background-color: red" (click)="eliminarPropietario()" >Eliminar Propietario</mat-chip>
+                    <mat-chip *ngIf="!enabled" color="primary" (click)="save(nombre.value,correo.value,telefono.value,direccion.value)" selected> Guardar Cambios</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="col-1 col-md">
+            </div>
+        </div>
+    </div>
+</div>

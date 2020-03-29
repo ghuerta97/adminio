@@ -1,0 +1,47 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Fecha de Pago</th>
+        <th scope="col">Opciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let gasto of gastos2; index as i;">
+        <th scope="row"> {{ gasto.descripcion}}</th>
+        <td> {{ gasto.valor}} </td>
+        <td> {{gasto.fechaPago}} </td>
+        <td>
+           <!-- <button class="btn" *ngIf="!gasto.comprobante"   
+          aria-label="Button that uppload document">
+          <i class="material-icons">archive</i>  -->
+            <input  id="file"  type="file"  name="file"  (change)="onFileChange($event)"  />
+          <!-- </button>  -->
+          <div *ngIf="gasto.comprobante" >
+            <button class="btn" color="primary"  >
+              <i class="material-icons">attach_file</i>
+              <a target="_blank" [href]="element.comprobante" ></a>
+            </button>
+            <button class="btn" (click)="eliminarDocumento(element)" >
+              <i class="material-icons">delete</i>
+            </button>            
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table> 
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+    
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>

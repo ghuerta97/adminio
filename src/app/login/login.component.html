@@ -1,0 +1,50 @@
+<div class="wrapper wrapper-full-page">
+  <div class="full-page login-page"  data-image="./assets/img/background-2.jpg">
+
+    <!-- <div class="header">
+      CondomiumApp
+    </div> -->
+
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div [class]="col+' col-md-4 col-sm-6 col-sm-offset-3' "  >
+            <form (ngSubmit)="onSubmit()" novalidate="" class="ng-untouched ng-pristine ng-valid">
+              <div class="card">
+                <div class="header text-center">Login</div>
+                <div class="content">
+                  <div class="form-group">
+                    <label>Email address</label>
+                    <input class="form-control" name="username" [(ngModel)]="username" placeholder="Enter email" type="text"></div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" name="password" [(ngModel)]="password" placeholder="Password"
+                      type="password">
+                  </div>
+                </div>
+                <div class="footer text-center">
+                  <button class="btn btn-fill btn-danger btn-wd" type="submit">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <footer class="footer footer-transparent">
+      <div class="container">
+        <nav class="pull-left">
+          <ul>
+            <li><a href="#"> Home </a></li>
+            <li><a href="#"> Company </a></li>
+            <li><a href="#"> Portfolio </a></li>
+            <li><a href="#"> Blog </a></li>
+          </ul>
+        </nav>
+        <p class="copyright pull-right"> © 2019 <a href="#">Creative Tim</a>, made with love
+          for a better web </p>
+      </div>
+    </footer> -->
+    <div class="full-page-background" style="background-image: url(./assets/img/background-2.jpg) "></div>
+  </div>
+</div>

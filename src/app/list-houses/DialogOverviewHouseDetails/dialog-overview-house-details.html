@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Propiedad</h1>
+<div mat-dialog-content>
+  <h6>Numero de propiedad: </h6> {{data.numeroPropiedad}}
+  <h6>Metros Cuadrados: </h6>{{data.m2}}
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="openUpdateHouse()" >Update House</button>
+  <button mat-button color="accent" (click)="onNoClick()">Cerrar</button>
+</div>

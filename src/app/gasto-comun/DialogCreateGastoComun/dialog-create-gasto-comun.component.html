@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Añadir </h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">Tipo de Gasto</div>
+        <div class="col">Monto</div>
+        <div class="col">Fecha de Vencimiento</div>
+    </div>
+    <form #form [formGroup]="gastoComunForm" (ngSubmit)="saveGastoComun()">
+        <div class="row">
+            <div class="col">
+
+                <input type="text" id="name" name="name" [formControlName]="'name'" matInput placeholder="ingrese tipo de gasto">
+
+            </div>
+            <div class="col">
+
+                <input type="text" id="monto" name="monto" [formControlName]="'monto'" matInput placeholder="ingrese monto(cpl)">
+
+            </div>
+            <div class="col">
+
+                <input type="text" id="fechaVencimiento" name="fechaVencimiento" [formControlName]="'fechaVencimiento'" matInput
+                    [matDatepicker]="dp">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+
+            </div>
+
+
+        </div>
+        <div class="input-file">
+
+            <mat-label>Documento</mat-label> <br>
+            <input id="documento" name="documento" [formControlName]="'documento'" type="file"
+                (change)="onFileChange($event)" accept="image/*;capture=camera"> 
+
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" (click)="saveGastoComun()" cdkFocusInitial>Añadir</button>
+</div>

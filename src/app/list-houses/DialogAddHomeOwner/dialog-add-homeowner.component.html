@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-header card-header-icon card-header-primary">
+        <div class="card-icon">
+            <i class="material-icons">person_outline</i>
+        </div>
+        <h4 class="card-title">Registrar propietario</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #nombre matInput placeholder="Nombre del propietario">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #correo matInput placeholder="Correo">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #telefono matInput placeholder="Numero de telefono">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #direccion matInput placeholder="Direccion">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #pass type="password" matInput placeholder="Contraseña">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input #passwordrepeat type="password" matInput placeholder="Confirmar Contraseña">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1 col-md-3">
+                <mat-chip-list>
+                    <mat-chip color="accent" (click)="onNoClick()" selected>Cerrar</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="col-10 col-md-6">
+                <mat-chip-list>
+                    <mat-chip color="primary"
+                        (click)="addHomeOwner(nombre.value,correo.value,telefono.value,direccion.value,pass.value,passwordrepeat.value)"
+                        selected>Agregar Propietario</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div clasvalus="col-1 col-md-3"></div>
+        </div>
+    </div>
+</div>
