@@ -3,32 +3,18 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Monto</th>
-        <th scope="col">Fecha de Pago</th>
-        <th scope="col">Opciones</th>
+        <th scope="col">No. propiedad</th>
+        <th scope="col">Nombre del propietario</th>
+        <th scope="col">Monto adeudado</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let gasto of gastos2; index as i;">
-        <th scope="row"> {{ gasto.descripcion}}</th>
-        <td> {{ gasto.valor}} </td>
-        <td> {{gasto.fechaPago}} </td>
+      <tr *ngFor="let moroso of list_morosos; index as i;">
+        <th scope="row"> </th>
+        <td> {{ moroso.numeroPropiedad}} </td>
+        <td> {{moroso.propietario.nombre}} </td>
         <td>
-           <!-- <button class="btn" *ngIf="!gasto.comprobante"   
-          aria-label="Button that uppload document">
-          <i class="material-icons">archive</i>  -->
-            <input  id="file"  type="file"  name="file"  (change)="onFileChange($event)"  />
-          <!-- </button>  -->
-          <div *ngIf="gasto.comprobante" >
-            <button class="btn" color="primary"  >
-              <i class="material-icons">attach_file</i>
-              <a target="_blank" [href]="element.comprobante" ></a>
-            </button>
-            <button class="btn" (click)="eliminarDocumento(element)" >
-              <i class="material-icons">delete</i>
-            </button>            
-          </div>
+          {{moroso.deuda}}
         </td>
       </tr>
       </tbody>

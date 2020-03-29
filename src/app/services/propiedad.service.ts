@@ -31,6 +31,9 @@ export class PropiedadService {
   deletePropiedad(id: number) {
     this.http.post<any>(environment.api+'/admin/propiedades/eliminar', {id: id})
   }
+  obtenerMorosos(): Observable<Propiedad[]> {
+    return this.http.get<Propiedad[]>(environment.api+'/admin/obtener_morosos');
+}
 
   
 
