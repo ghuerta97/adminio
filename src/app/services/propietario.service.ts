@@ -21,9 +21,7 @@ export class PropietarioService {
         return this.http.get<any>(environment.api+'/admin/propietario?id='+id);
     }
 
-    obtenerMorosos(): Observable<Propietario[]> {
-        return this.http.get<Propietario[]>(environment.api+'/admin/obtener_morosos');
-    }
+    
 
     agregarPropietario(propietario: Propietario){
         return this.http.post<any>(environment.api+'/admin/propietario/agregar',propietario)
