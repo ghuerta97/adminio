@@ -28,11 +28,11 @@ export class DialogHouseCommonExpenses implements OnInit{
 
       payTotal(){
         this.dialogRef.close();
-        this.route.navigate(['payment'],{state: {'mount': this.total}});
+        
       }
       payMount(mount){
         this.dialogRef.close();
-        this.route.navigate(['payment'],{state: {'mount': mount}})
+       
       }
 
       onFileInput(event) {
