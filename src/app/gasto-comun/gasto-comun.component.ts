@@ -15,7 +15,7 @@ export class GastoComunComponent implements OnInit, OnDestroy, OnChanges {
   dataSource:  MatTableDataSource<GastoComun> = new MatTableDataSource<GastoComun>();
   gastos: GastoComun[] = [];
   page = 1;
-  pageSize = 5;
+  pageSize = 15;
   collectionSize = 0;
   image: any;
 
