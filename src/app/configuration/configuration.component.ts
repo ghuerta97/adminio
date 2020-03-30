@@ -23,9 +23,6 @@ export class ConfigurationComponent implements OnInit {
       this.configuracionService.obtenerConfiguracion()
         .subscribe(data => {
           this.configActual = data;
-          this.configActual.calculoGasto = data.calculoGasto;
-          this.configActual.dia = data.dia;
-          this.configActual.hora = data.hora;
           var [h, m] = this.configActual.hora.split(':');
           this.time.hour = Number(h);
           this.time.minute = Number(m);
@@ -40,7 +37,7 @@ export class ConfigurationComponent implements OnInit {
     this.configActual.calculoGasto = forma;
     this.configuracionService.configuraBoleta(this.configActual)
       .subscribe(data => {
-
+        this.ngOnInit();
       });
   }
 }

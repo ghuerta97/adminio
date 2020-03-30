@@ -36,7 +36,7 @@ export class GastoComunService {
   }
 
   deleteGastoComun(id: number): Observable<boolean> {
-    return this.http.get<boolean>(environment.api+'/admin/gasto_comun/eliminar?id='+id,{});
+    return this.http.get<boolean>(environment.api+'/admin/gasto_comun/borrar?id='+id,{});
   }
 
   public uploadImage(gasto: GastoComun, imagen): Observable<number>{
