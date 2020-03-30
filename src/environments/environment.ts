@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://ec2-3-14-14-67.us-east-2.compute.amazonaws.com:8080',
+  api: 'https://adminio-backend.herokuapp.com',
   firebase: {
     apiKey: "AIzaSyCJzZDVH5BLq3S4jq6z_lB4WSrUpyi0k2Y",
     authDomain: "adminio.firebaseapp.com",
