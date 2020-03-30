@@ -28,7 +28,7 @@
       <tr *ngFor="let gasto of gastos2; index as i;">
         <th scope="row"> {{ gasto.descripcion}}</th>
         <td> {{ gasto.valor}} </td>
-        <td> {{gasto.fechaPago}} </td>
+        <td> {{gasto.fechaPago | date: 'd/MM/yyyy'}} </td>
         <td>
            <!-- <button class="btn" *ngIf="!gasto.comprobante"   
           aria-label="Button that uppload document">
