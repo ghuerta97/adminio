@@ -33,6 +33,11 @@ export class  AuthService {
         })
     }
 
+    logout() {
+      this.setToken('');
+      this.router.navigateByUrl('/login');
+    }
+
     getToken(): string {
         return localStorage.getItem(TOKEN_NAME);
       }
