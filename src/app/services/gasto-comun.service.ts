@@ -29,8 +29,8 @@ export class GastoComunService {
     return this.http.post<any>(environment.api+'/admin/gasto_comun/editar', gasto);
   }
 
-  deleteGastoComun(id: number): Observable<any> {
-    return this.http.post<any>(environment.api+'/admin/gasto_comun/eliminar',{id: id});
+  deleteGastoComun(id: number): Observable<boolean> {
+    return this.http.post<boolean>(environment.api+'/admin/gasto_comun/eliminar?id='+id,{});
   }
 
   saveDocumento(id_gasto: number, archivo: string){

@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { GastoComun } from 'app/model/gastocomun';
 import { GastoComunService } from 'app/services/gasto-comun.service';
 import { DialogCreateGastoComun } from './DialogCreateGastoComun/dialog-create-gasto-comun.component';
+import { DialogConfirmar } from 'app/list-houses/DialogSeeHomeowner/dialog-seehomeowner.component';
 
 @Component({
   selector: 'app-gasto-comun',
@@ -78,6 +79,23 @@ export class GastoComunComponent implements OnInit, OnDestroy {
        console.log(reader.result)
       };
     }
+  }
+
+  deleteComonExpenses(id) {
+    const dialogRef = this.dialog.open(DialogConfirmar);
+    dialogRef.beforeClosed().
+    subscribe(data=> {
+      if(data.ok) {
+        this.gastoComunService.deleteGastoComun(id)
+        .subscribe(data=> {
+          if(data) {
+            console.log('eleminado');
+          } else {
+            alert('El gasto a una boleta');
+          }
+        })
+      }
+    })
   }
 
 }

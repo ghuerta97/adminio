@@ -21,6 +21,7 @@
         <th scope="col">Monto</th>
         <th scope="col">Fecha de Pago</th>
         <th scope="col">Opciones</th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
@@ -43,6 +44,12 @@
               <i class="material-icons">delete</i>
             </button>            
           </div>
+        </td>
+        <td>
+          <button (click)="deleteComonExpenses(gasto.id)">
+            <i class="material-icons">attach_file</i>
+            Eliminar Gasto Comun
+          </button>
         </td>
       </tr>
       </tbody>
