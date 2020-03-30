@@ -11,7 +11,14 @@
       <tbody>
       <tr *ngFor="let moroso of list_morosos; index as i;">
         <td> {{ moroso.numeroPropiedad}} </td>
-        <td> {{moroso.propietario.nombre}} </td>
+        <td >
+          <div *ngIf="moroso.propietario">
+            {{moroso.propietario.nombre}}
+          </div>
+          <div *ngIf="!moroso.propietario" >
+            No hay propietario
+          </div>
+           </td>
         <td>
           {{moroso.deuda}}
         </td>
