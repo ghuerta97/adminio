@@ -12,10 +12,10 @@
       <tr *ngFor="let moroso of list_morosos; index as i;">
         <td> {{ moroso.numeroPropiedad}} </td>
         <td >
-          <div *ngIf="moroso.propietario">
+          <div *ngIf="moroso.propietario !== null">
             {{moroso.propietario.nombre}}
           </div>
-          <div *ngIf="!moroso.propietario" >
+          <div *ngIf="moroso.propietario === null" >
             No hay propietario
           </div>
            </td>
