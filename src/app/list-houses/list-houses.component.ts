@@ -74,7 +74,7 @@ export class ListHousesComponent implements OnInit {
             data: { title: 'Añadir Propiedad', subtitle: 'Formulario de ingreso', titleButton: 'Añadir', add: true, house:null }
           });
           dialogRef.afterClosed().subscribe(result => {
-            console.log('Ha cerrado Dialog Add House')
+            location.reload();
           });
         }
       }
@@ -97,7 +97,9 @@ export class ListHousesComponent implements OnInit {
       data: house
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if(result.add){
+        this.ngOnInit();
+      }
     });
   }
 

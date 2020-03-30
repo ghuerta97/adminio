@@ -11,7 +11,7 @@
             <div class="col-2 col-md-4"></div>
             <mat-form-field appearance="fill" class="col-8 col-md-4">
               <mat-label>Dia de notificación</mat-label>              
-              <mat-select [(value)]="selectedDia">
+              <mat-select [(value)]="configActual.dia">
                 <mat-option *ngFor="let dia of dias" [value]="dia"> {{dia}} </mat-option>
               </mat-select>
               </mat-form-field>
@@ -28,16 +28,16 @@
             <div class="col-2 col-md-4"></div>
             <mat-form-field appearance="fill" class="col-8 col-md-4">
                 <mat-label>Forma de distribución</mat-label>
-                 <mat-select [(value)]="selectedForma" >
+                 <mat-select [(value)]="configActual.calculoGasto" >
                   <mat-option [value]="true"> Por metros cuadrados </mat-option>
-                  <mat-option [value]=false> En partes iguales </mat-option>
+                  <mat-option [value]="false"> En partes iguales </mat-option>
                 </mat-select>
                 </mat-form-field>
         </div>
         <div class="row">
           <div class="col-3 col-md-4"></div>
             <mat-chip-list class="col-7 col-md-4">
-              <mat-chip color="primary" selected (click)="saveConfiguracion(selectedDia,time,selectedForma)"> Guardar Cambios</mat-chip>
+              <mat-chip color="primary" selected (click)="saveConfiguracion(configActual.calculoGasto,configActual.dia,time)"> Guardar Cambios</mat-chip>
             </mat-chip-list>
         </div>
       </div>

@@ -1,33 +1,37 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
+import { Component, OnInit, ViewChild, OnDestroy, OnChanges, SimpleChanges, Input, Inject } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GastoComun } from 'app/model/gastocomun';
 import { GastoComunService } from 'app/services/gasto-comun.service';
 import { DialogCreateGastoComun } from './DialogCreateGastoComun/dialog-create-gasto-comun.component';
 import { DialogConfirmar } from 'app/list-houses/DialogSeeHomeowner/dialog-seehomeowner.component';
-
 @Component({
   selector: 'app-gasto-comun',
   templateUrl: './gasto-comun.component.html',
   styleUrls: ['./gasto-comun.component.scss']
 })
-export class GastoComunComponent implements OnInit, OnDestroy {
+export class GastoComunComponent implements OnInit, OnDestroy, OnChanges {
 
   displayColumns: string[] = [ 'descripcion',  'monto', 'fecha', 'opciones']
   dataSource:  MatTableDataSource<GastoComun> = new MatTableDataSource<GastoComun>();
   gastos: GastoComun[] = [];
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   collectionSize = 0;
+  image: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private gastoComunService: GastoComunService,
     private dialog: MatDialog) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit();
+  }
   ngOnDestroy(): void {
     
   }
 
 
   ngOnInit() {
+    
     this.gastoComunService.listAllGastoComunes()
     .subscribe(data => {
       console.log(data);
@@ -58,27 +62,24 @@ export class GastoComunComponent implements OnInit, OnDestroy {
     })
   }
 
-  eliminarDocumento(element) {
-    element.documento = null;
-    this.gastoComunService.createGastoComun(element)
+  eliminarDocumento(element: GastoComun) {
+    element.comprobante = null;
+    this.gastoComunService.updateGastoComun(element)
     .subscribe(data => {
-
+      this.ngOnInit();
     }, error => {
       console.log(error);
     })
   }
 
-  onFileChange(event) {
-    let reader = new FileReader();
-    if(event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      console.log(file);
-      reader.readAsDataURL(file);
-      console.log(reader);
-      reader.onload = () => {
-       console.log(reader.result)
-      };
-    }
+  onFileChange(event, gasto: GastoComun) {
+    const dialogRef = this.dialog.open(SubiendoComponent);
+    this.image = event.target.files[0];
+    this.gastoComunService.uploadImage(gasto,this.image)
+    .subscribe(porcentaje=> {
+    }, error => {
+      console.error(error);
+    });
   }
 
   deleteComonExpenses(id) {
@@ -96,6 +97,27 @@ export class GastoComunComponent implements OnInit, OnDestroy {
         })
       }
     })
+  }
+
+  isMobileMenu() {
+    if ($(window).width() > 991) {
+      return false;
+    }
+    return true;
+  };
+
+}
+@Component({
+  selector: 'app',
+  template: '<mat-spinner></mat-spinner> <br> Subiendo...'
+})
+export class SubiendoComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogCreateGastoComun>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ){
+
   }
 
 }

@@ -14,15 +14,19 @@ import { Propiedad } from "app/model/propiedad";
       public dialog: MatDialog) {}
   
     onNoClick(): void {
-      this.dialogRef.close();
+      this.dialogRef.close({add: false});
     }
 
     openUpdateHouse() {
       const dialogRef = this.dialog.open(DialogAddHouseComponent,{
         width: '600px',
         height: '445px',
-        data: { title: 'Update House', subtitle: 'Actualice los datos de la casa', titleButton: 'Update', add: false, house: this.data}
+        data: { title: 'Actualizar Propiedad', subtitle: 'Actualice los datos de la propiedad', titleButton: 'Actualizar', add: false, house: this.data}
       });
+      dialogRef.beforeClosed()
+      .subscribe(data =>{
+        this.dialogRef.close({add: data.agregado});
+      })
     }
   
   }

@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
-import { DialogCreateGastoComun } from "./DialogCreateGastoComun/dialog-create-gasto-comun.component";
-import { MatButtonModule, MatTableModule, MatFormFieldModule, MatDialogModule, MatInputModule, MatDatepickerModule, MatDialog, MatSpinner } from "@angular/material";
+import { DialogCreateGastoComun, SubiendoNuevoComponent } from "./DialogCreateGastoComun/dialog-create-gasto-comun.component";
+import { MatButtonModule, MatTableModule, MatFormFieldModule, MatDialogModule, MatInputModule, MatDatepickerModule, MatDialog, MatSpinner, MatProgressSpinnerModule } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { SubiendoComponent } from "./gasto-comun.component";
 
 @NgModule(
     {
@@ -15,12 +16,17 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
             MatDialogModule,
             MatInputModule,
             MatDatepickerModule,
-            NgbModule
+            NgbModule,
+            MatProgressSpinnerModule
         ], declarations: [
-            DialogCreateGastoComun
+            DialogCreateGastoComun,
+            SubiendoComponent,
+            SubiendoNuevoComponent
         ],
         entryComponents: [
-            DialogCreateGastoComun
+            DialogCreateGastoComun,
+            SubiendoComponent,
+            SubiendoNuevoComponent
         ]
     }
 )

@@ -15,6 +15,6 @@ export class ConfigurationService {
     }
 
     obtenerConfiguracion(): Observable<Configuration>{
-        return this.http.get<Configuration>(environment.api+'/admin/configuration')
+        return this.http.get<Configuration>(environment.api+'/admin/configuracion')
     }
 }

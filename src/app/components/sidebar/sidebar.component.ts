@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/administrador/gasto-comun',
-    title: 'Gasto Comun',
+    title: 'Gasto Común',
     icon: 'assignment',
     class: ''
   },
@@ -35,7 +35,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/administrador/settings',
-    title: 'Configuracion',
+    title: 'Configuración',
     icon: 'settings',
     class: ''
   }

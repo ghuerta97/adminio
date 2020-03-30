@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/authguard.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes =[
   {
@@ -20,7 +21,7 @@ const routes: Routes =[
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
     },
   ],
-  canActivate: [AuthGuard]
+  canActivate: [AuthGuard, AdminGuard]
   },
   {
     path:'login',

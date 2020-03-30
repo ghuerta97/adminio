@@ -3,13 +3,19 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { GastoComun } from 'app/model/gastocomun';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GastoComunService {
 
-  constructor(private http: HttpClient) { }
+  private filePath: any;
+  private downloadURL: Observable<string> ;
+
+  constructor(private http: HttpClient,
+    private storage: AngularFireStorage) { }
 
   createGastoComun(gasto: GastoComun): Observable<GastoComun> {
     return this.http.post<GastoComun>(environment.api+'/admin/gasto_comun/agregar', gasto);
@@ -30,20 +36,28 @@ export class GastoComunService {
   }
 
   deleteGastoComun(id: number): Observable<boolean> {
-    return this.http.post<boolean>(environment.api+'/admin/gasto_comun/eliminar?id='+id,{});
+    return this.http.get<boolean>(environment.api+'/admin/gasto_comun/eliminar?id='+id,{});
   }
 
-  saveDocumento(id_gasto: number, archivo: string){
-    let formData = new FormData();
-    formData.append("archivo", archivo);
-    formData.append("id",''+id_gasto);
-
-    const req = new HttpRequest('POST',environment.api+'/admin/gasto_comun/upload',formData, {
-      reportProgress: true,
-     
-    })
-
-    return this.http.request(req);
+  public uploadImage(gasto: GastoComun, imagen): Observable<number>{
+    this.filePath = 'documentos/'+gasto.id;
+    const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath,imagen);
+    task.snapshotChanges()
+    .pipe(
+      finalize(()=> {
+        fileRef.getDownloadURL()
+        .subscribe(
+          urlImagen=> {
+            this.downloadURL = urlImagen;
+            gasto.comprobante = ''+urlImagen;
+            console.log(gasto);
+            this.updateGastoComun(gasto).subscribe(data => {location.reload()});
+          }
+        )
+      })
+    ).subscribe()
+    return task.percentageChanges();
   }
 
   pagar(id:number){
