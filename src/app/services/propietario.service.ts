@@ -32,7 +32,7 @@ export class PropietarioService {
     }
 
     deletePropietario(id: number){
-        return this.http.get<any>(environment.api+'/admin/propietario/delete?id='+id);
+        return this.http.get<any>(environment.api+'/admin/propietario/eliminar?id='+id);
     }
 
 

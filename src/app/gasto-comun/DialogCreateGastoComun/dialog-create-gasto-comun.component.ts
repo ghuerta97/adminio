@@ -40,7 +40,7 @@ export class DialogCreateGastoComun implements OnInit {
         name: ['', [Validators.required]],
         monto: ['', [Validators.required]],
         fechaVencimiento: ['', [Validators.required]],
-        documento: ['',[Validators.required]]
+        documento: ['',[]]
       })
     }
 
