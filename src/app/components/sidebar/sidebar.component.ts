@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/administrador/list-houses',
-    title: 'List of houses',
+    title: 'Propiedades',
     icon: 'house',
     class: ''
   },
@@ -28,13 +28,13 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/administrador/calendar-events',
-    title: 'Calendar of Events',
+    title: 'Calendario de Eventos',
     icon: 'event',
     class: ''
   },
   {
     path: '/administrador/settings',
-    title: 'Settings',
+    title: 'Configuracion',
     icon: 'settings',
     class: ''
   }

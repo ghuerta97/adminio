@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogOverviewHouseDetails } from './DialogOverviewHouseDetails/dialog-overview-house-details.component';
 import { DialogHouseCommonExpenses } from './DialogHouseCommonExpenses/dialog-house-common-expenses.component';
 import { DialogAddHouseComponent } from './DialogAddHouse/dialog-add-house.component';
-import { DialogSeeHomeOwnerComponent } from './DialogSeeHomeowner/dialog-seehomeowner.component';
+import { DialogSeeHomeOwnerComponent, DialogConfirmar } from './DialogSeeHomeowner/dialog-seehomeowner.component';
 import { Propietario } from 'app/model/propietario';
 import { Propiedad } from 'app/model/propiedad';
 import { PropiedadService } from 'app/services/propiedad.service';
@@ -71,25 +71,11 @@ export class ListHousesComponent implements OnInit {
           const dialogRef = dialog.open(DialogAddHouseComponent, {
             width: '600px',
             height: '445px',
-            data: { title: 'Add House', subtitle: 'Formulario de ingreso', titleButton: 'Add', add: true, house:null }
+            data: { title: 'Añadir Propiedad', subtitle: 'Formulario de ingreso', titleButton: 'Añadir', add: true, house:null }
           });
           dialogRef.afterClosed().subscribe(result => {
             console.log('Ha cerrado Dialog Add House')
           });
-        }
-      },
-      {
-        name: 'Eliminar Houses',
-        icon: 'delete',
-        action: function (visibleDelete: boolean) {
-          switch (visibleDelete) {
-            case true:
-              return false;
-            case false:
-              return true;
-            default:
-              return undefined;
-          }
         }
       }
     ];
@@ -98,61 +84,6 @@ export class ListHousesComponent implements OnInit {
     this.dataSource.filterPredicate = (data: Propiedad, filter: string) => { return data.numeroPropiedad.toString().indexOf(filter) != -1; };
   }
 
-
-  cancelDelete(algo, masterChecked) {
-    this.allCheckboxPage(masterChecked);
-  }
-
-  deleteHouses() {
-    let newELEMENT_DATA = [];
-    for (let i = 0; i < this.propiedades.length; i++) {
-      for (let j = 0; j < this.deletesHouses.length; j++) {
-        if (this.propiedades[i].numeroPropiedad === this.deletesHouses[j].numeroPropiedad) {
-          return;
-        } else if (this.propiedades[i].numeroPropiedad !== this.deletesHouses[j].numeroPropiedad && j === this.propiedades.length) {
-          newELEMENT_DATA.push(this.propiedades[i])
-        }
-      }
-    }
-    console.log(newELEMENT_DATA);
-    this.dataSource = new MatTableDataSource<Propiedad>(this.propiedades);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = (data: Propiedad, filter: string) => { return data.numeroPropiedad.toString().indexOf(filter) != -1; };
-  }
-
-  allCheckboxPage(checked) {
-    if (!this.indeterCheckbox1) {
-      for (let house of this.propiedades) {
-        house.checked = checked;
-        if (checked) {
-          this.deletesHouses = this.propiedades;
-        } else {
-          this.deletesHouses = [];
-        }
-      }
-      console.log(this.deletesHouses);
-      this.dataSource = new MatTableDataSource<Propiedad>(this.propiedades);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.filterPredicate = (data: Propiedad, filter: string) => { return data.numeroPropiedad.toString().indexOf(filter) != -1; };
-    } else {
-      this.indeterCheckbox1 = false;
-    }
-  }
-
-
-
-  addHouseDelete() {
-    if (!this.indeterCheckbox1) {
-      this.indeterCheckbox1 = true;
-    }
-    this.deletesHouses = [];
-    for (let house of this.propiedades) {
-      if (house.checked) {
-        this.deletesHouses.push(house);
-      }
-    }
-    console.log(this.deletesHouses);
-  }
 
   applyFilter(myValue) {
     myValue = myValue.trim();
@@ -198,7 +129,18 @@ export class ListHousesComponent implements OnInit {
     return true;
   };
 
+  deleteHouse(propiedad) {
+    const dialogRef = this.dialog.open(DialogConfirmar);
+    dialogRef.beforeClosed()
+    .subscribe(data => {
+      if(data.ok){
+        this.propiedadService.deletePropiedad(propiedad)
+        .subscribe(data=>{})
+      }
+    })
+    
+  }
+
 
 
 }
-
