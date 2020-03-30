@@ -1,36 +1,36 @@
-<h1 mat-dialog-title>Boletas</h1>
-<div mat-dialog-content>
+<div *ngIf="!data.pagada">
+  <h1 mat-dialog-title>Boletas</h1>
+  <div mat-dialog-content>
 
-  <div>
-    Detalles de gastos comunes
-    <ol>
-      <li *ngFor="let gasto of data.gastosComunes">{{gasto.descripcion}}</li>
-    </ol>
+    <div>
+      Detalles de gastos comunes
+      <ol>
+        <li *ngFor="let gasto of data.gastosComunes">{{gasto.descripcion}}</li>
+      </ol>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Fecha Vencimiento</th>
+          <td>{{ data.fechaVencimiento | date: 'd/MM/yyyy'}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Total</th>
+          <td>{{total | currency:'$' | lowercase}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      
-      <tr>
-        <th scope="row">Fecha Vencimiento</th>
-        <td>{{ data.fechaVencimiento | date: 'd/MM/yyyy'}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Total</th>
-        <td>{{total | currency:'$' | lowercase}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div mat-dialog-actions>
-  <button style="align-content: center" mat-button color="accent" (click)="onNoClick()">Cerrar</button>
-  <button mat-button color="primary" (click)="payTotal()" >Pagar Total</button>
+  <div mat-dialog-actions>
+    <button style="align-content: center" mat-button color="accent" (click)="onNoClick()">Cerrar</button>
+    <button mat-button color="primary" (click)="payTotal()">Pagar Total</button>
+  </div>
 </div>
 <div *ngIf="data.pagada">
   La boleta de este mes esta pagada
