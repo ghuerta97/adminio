@@ -21,7 +21,7 @@ import { Propiedad } from "app/model/propiedad";
       const dialogRef = this.dialog.open(DialogAddHouseComponent,{
         width: '600px',
         height: '445px',
-        data: { title: 'Update House', subtitle: 'Actualice los datos de la casa', titleButton: 'Update', house: this.data}
+        data: { title: 'Update House', subtitle: 'Actualice los datos de la casa', titleButton: 'Update', add: false, house: this.data}
       });
     }
   

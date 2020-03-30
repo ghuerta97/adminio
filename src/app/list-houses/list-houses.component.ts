@@ -71,7 +71,7 @@ export class ListHousesComponent implements OnInit {
           const dialogRef = dialog.open(DialogAddHouseComponent, {
             width: '600px',
             height: '445px',
-            data: { title: 'Add House', subtitle: 'Formulario de ingreso', titleButton: 'Add' }
+            data: { title: 'Add House', subtitle: 'Formulario de ingreso', titleButton: 'Add', add: true, house:null }
           });
           dialogRef.afterClosed().subscribe(result => {
             console.log('Ha cerrado Dialog Add House')

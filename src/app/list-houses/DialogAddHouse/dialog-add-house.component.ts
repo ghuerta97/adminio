@@ -20,7 +20,7 @@ export class DialogAddHouseComponent implements OnInit {
   houseForm: FormGroup;
   houseDetails: Propiedad = {} as Propiedad;
   listPropietario: Propietario[] = [] as Propietario[];
-  propietario : Propietario = {} as Propietario;
+  propietario: Propietario = {} as Propietario;
   constructor(
     public dialogRef: MatDialogRef<DialogAddHouseComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -47,17 +47,17 @@ export class DialogAddHouseComponent implements OnInit {
       });
     }
 
-    
+
 
   }
 
   ngOnInit() {
     this.propietarioService.listPropietarios()
-    .subscribe(data=> {
-      if(data) {
-        this.listPropietario = data;
-      }
-    })
+      .subscribe(data => {
+        if (data) {
+          this.listPropietario = data;
+        }
+      })
   }
 
   onNoClick(): void {
@@ -89,22 +89,31 @@ export class DialogAddHouseComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.houseForm.invalid){
+    if (this.houseForm.invalid) {
       return;
     }
     this.houseDetails.m2 = this.propiedad.m2.value;
     this.houseDetails.numeroPropiedad = this.propiedad.number.value;
     this.houseDetails.propietario = this.propiedad.propietario.value;
 
-    this.houseService.agregarPropiedad(this.houseDetails)
-    .subscribe(data=> {
-      console.log(data);
-      this.dialogRef.close({agregado: true})
-    }, error=> {
-      console.error(error);
-      
-    })
-    
+    if (this.data.add) {
+      this.houseService.agregarPropiedad(this.houseDetails)
+        .subscribe(data => {
+          console.log(data);
+          this.dialogRef.close({ agregado: true })
+        }, error => {
+          console.error(error);
+
+        })
+    } else {
+      this.houseService.updatePropiedad(this.houseDetails)
+      .subscribe(data=> {
+        console.log(data);
+        this.dialogRef.close({ agregado: true })
+      })
+    }
+
+
   }
 }
 
